@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Like Button</title>
+  <style>
+    body {
+      font-family: 'MASQUE', sans-serif; /* Remplacez 'MASQUE' par le nom réel de la police par défaut */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #like-button {
+      position: relative;
+      overflow: hidden;
+      padding: 15px 30px; /* Ajustez les valeurs pour agrandir le bouton */
+      font-size: 18px; /* Ajustez la taille de la police */
+      font-family: 'MASQUE', sans-serif; /* Remplacez 'MASQUE' par le nom réel de la police par défaut */
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    }
+
+    #like-button:hover {
+      background-color: #2980b9;
+    }
+
+    #like-button:active {
+      transform: scale(1.5) rotate(360deg); /* Augmentez le facteur de mise à l'échelle */
+      background-color: #e74c3c;
+    }
+
+    .clone {
+      position: absolute;
+      background-color: #e74c3c;
+      border-radius: 50%;
+      animation: explode 0.5s ease-in-out forwards;
+    }
+
+    @keyframes explode {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    function superLike() {
+      const button = document.getElementById('like-button');
+      const clone = document.createElement('div');
+      clone.classList.add('clone');
+
+      const rect = button.getBoundingClientRect();
+      clone.style.width = rect.width + 'px';
+      clone.style.height = rect.height + 'px';
+      clone.style.top = (rect.top + window.scrollY) + 'px';
+      clone.style.left = (rect.left + window.scrollX) + 'px';
+
+      document.body.appendChild(clone);
+
+      setTimeout(() => {
+        clone.remove();
+        button.style.fontFamily = 'sketch'; // Changer la police après le clic
+      }, 500);
+    }
+  </script>
+
+  <button id="like-button" onclick="superLike()">Like</button>
+
+</body>
+</html>
